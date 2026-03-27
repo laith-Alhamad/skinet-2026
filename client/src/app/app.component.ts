@@ -5,27 +5,21 @@ import { HttpClient } from '@angular/common/http';
 import { response } from 'express';
 import { Product } from './shared/models/product';
 import { pagination } from './shared/models/pagination';
-
+import { ShopService } from './core/services/shop.service';
+import { ShopComponent } from "./features/shop/shop.component";
+import { MatButton } from '@angular/material/button';
 @Component({
   selector: 'app-root',
   standalone:true,
-  imports: [RouterOutlet, Header],
+  imports: [Header, ShopComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  
-  baseUrl='http://localhost:5270/api/'
-  private http = inject(HttpClient);
+export class AppComponent   {
+     
   title = 'client';
-  products: Product[] = [];
+   
 
-  ngOnInit(): void {
-    this.http.get<pagination<Product>>(this.baseUrl + 'products').subscribe({
-      next: response => this.products = response.data,
-      error: error=>console.log(error),
-      complete:() => console.log('complete')
-    })
-  }
+
 
 }
