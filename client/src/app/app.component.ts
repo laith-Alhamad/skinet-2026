@@ -8,10 +8,11 @@ import { pagination } from './shared/models/pagination';
 import { ShopService } from './core/services/shop.service';
 import { ShopComponent } from "./features/shop/shop.component";
 import { MatButton } from '@angular/material/button';
+
 @Component({
   selector: 'app-root',
   standalone:true,
-  imports: [Header, ShopComponent],
+  imports: [Header, ShopComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
