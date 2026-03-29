@@ -1,0 +1,56 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+
+@Component({
+  selector: 'app-test-errorcomponent',
+  standalone: true,
+  imports: [
+    MatButton,
+  ],
+  templateUrl: './test-errorcomponent.html',
+  styleUrl: './test-errorcomponent.css',
+})
+export class TestErrorcomponent {
+
+  baseUrl = 'http://localhost:5270/api/';
+  private http = inject(HttpClient);
+  validationErrors?: string[];
+
+
+
+  get404Error() {
+    this.http.get(this.baseUrl + 'buggy/notfound').subscribe({
+      next: response => console.log(response),
+      error: err => console.log(err)
+    });
+  }
+
+  get400Error() {
+    this.http.get(this.baseUrl + 'buggy/badrequest').subscribe({
+      next: response => console.log(response),
+      error: err => console.log(err)
+    });
+  }
+
+  get401Error() {
+    this.http.get(this.baseUrl + 'buggy/unauthorized').subscribe({
+      next: response => console.log(response),
+      error: err => console.log(err)
+    });
+  }
+
+  get500Error() {
+    this.http.get(this.baseUrl + 'buggy/internalerror').subscribe({
+      next: response => console.log(response),
+      error: error => console.log(error)
+    });
+  }
+
+  get400ValidationError() {
+    this.http.post(this.baseUrl + 'buggy/validationerror', {}).subscribe({
+      next: response => console.log(response),
+      error: error => this.validationErrors = error,
+    });
+  }
+}
