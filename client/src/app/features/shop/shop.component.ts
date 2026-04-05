@@ -16,11 +16,15 @@ import { ShopParams } from '../../shared/models/shopParams';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { pagination } from '../../shared/models/pagination';
 import e from 'express';
+import { MatCardModule } from '@angular/material/card';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shop',
+  standalone: true,
   imports: [
+    MatCardModule,
     MatCard,
     ProductItemComponent,
     MatButton,
